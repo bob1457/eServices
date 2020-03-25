@@ -31,9 +31,11 @@ namespace eServices.AuthService
         {
             // Init Serilog configuration
             Log.Logger = new LoggerConfiguration()
+                //.ReadFrom.Configuration(configuration.GetSection("Serilog"))
                 .ReadFrom.Configuration(configuration)
+                //.WriteTo.RollingFile(@"c:\Temp\eServiceLog\log.txt", retainedFileCountLimit: 7)
                 .Enrich.WithProperty("Application", "Authentication Service")
-                //.WriteTo.Seq("http://localhost:5341") // temporarily disabled so that the logs written to log files in E:\Temp\real --- by default
+                .WriteTo.Seq("http://localhost:5341") // temporarily disabled so that the logs written to log files in E:\Temp\real --- by default
                 .CreateLogger();
 
             Configuration = configuration;
@@ -75,6 +77,8 @@ namespace eServices.AuthService
              );
 
             services.AddSingleton(Configuration);
+
+            services.AddLogging();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -160,9 +164,13 @@ namespace eServices.AuthService
                 c.RoutePrefix = string.Empty; // To serve the Swagger UI at the app's root (http://localhost:<port>/)
             });
 
+            app.UseAuthentication();
+
             loggerFactory.AddSerilog();
 
             app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
