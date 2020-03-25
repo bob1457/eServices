@@ -50,5 +50,19 @@ namespace eServices.AuthService.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _mediator.Send(command);
+
+            return Ok(result);
+        }
     }
 }

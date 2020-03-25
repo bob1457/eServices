@@ -5,6 +5,7 @@ using eServices.AuthService.Models.ViewModels;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,12 +46,12 @@ namespace eServices.AuthService.CommandHandler
                 roleAdded.Name = request.Name;
                 roleAdded.Description = request.Description;
                 
-                _logger.LogInformation("Role:" + request.Name + " has been added");
+                Log.Information("Role:" + request.Name + " has been added");
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occured :(" + ex.Message);
+                Log.Error(ex, "Error occured :(" + ex.Message);
                 throw ex;
             }
 
