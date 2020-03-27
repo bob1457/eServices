@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthService", "AuthService", "{2114379E-3EBD-4F56-9C20-E594D7916B4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eServices.AuthService", "eServices.AuthService\eServices.AuthService.csproj", "{A0054C42-5C37-49C7-85CE-9C58BBEDB1C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eServices.AuthService", "eServices.AuthService\eServices.AuthService.csproj", "{A0054C42-5C37-49C7-85CE-9C58BBEDB1C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eServices.IdentityService", "eServices.IdentityService\eServices.IdentityService.csproj", "{D0D93438-575B-417F-9630-E4D0BA2AD093}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eServices.TestApi", "eServices.TestApi\eServices.TestApi.csproj", "{299D169F-CF4F-4E79-A498-5ACEEF18D440}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +21,22 @@ Global
 		{A0054C42-5C37-49C7-85CE-9C58BBEDB1C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0054C42-5C37-49C7-85CE-9C58BBEDB1C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0054C42-5C37-49C7-85CE-9C58BBEDB1C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0D93438-575B-417F-9630-E4D0BA2AD093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0D93438-575B-417F-9630-E4D0BA2AD093}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0D93438-575B-417F-9630-E4D0BA2AD093}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0D93438-575B-417F-9630-E4D0BA2AD093}.Release|Any CPU.Build.0 = Release|Any CPU
+		{299D169F-CF4F-4E79-A498-5ACEEF18D440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{299D169F-CF4F-4E79-A498-5ACEEF18D440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{299D169F-CF4F-4E79-A498-5ACEEF18D440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{299D169F-CF4F-4E79-A498-5ACEEF18D440}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A0054C42-5C37-49C7-85CE-9C58BBEDB1C5} = {2114379E-3EBD-4F56-9C20-E594D7916B4B}
+		{D0D93438-575B-417F-9630-E4D0BA2AD093} = {2114379E-3EBD-4F56-9C20-E594D7916B4B}
+		{299D169F-CF4F-4E79-A498-5ACEEF18D440} = {2114379E-3EBD-4F56-9C20-E594D7916B4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC34919D-271C-44BB-9717-83B711F22BB8}
