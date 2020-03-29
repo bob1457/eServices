@@ -2,6 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using eServices.IdentityService.Command;
+using eServices.IdentityService.Model;
+using eServices.IdentityService.Model.ViewModel;
 using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Events;
@@ -13,6 +16,7 @@ using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -25,23 +29,35 @@ namespace eServices.IdentityService
     /// The login service encapsulates the interactions with the user data store. This data store is in-memory only and cannot be used for production!
     /// The interaction service provides a way for the UI to communicate with identityserver for validation and context retrieval
     /// </summary>
+    [Route("api/[controller]")]
     [SecurityHeaders]
     [AllowAnonymous]
     public class AccountController : Controller
     {
+        private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly RoleManager<AppIdentityRole> _roleManager;
+
         private readonly TestUserStore _users;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
 
+        
+
         public AccountController(
+            UserManager<AppIdentityUser> userManager, 
+            RoleManager<AppIdentityRole> roleManager,
+
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IEventService events,
             TestUserStore users = null)
         {
+            _userManager = userManager;
+            _roleManager = roleManager;
+            
             // if the TestUserStore is not in DI, then we'll just use the global users collection
             // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
             _users = users ?? new TestUserStore(TestUsers.Users);
@@ -50,6 +66,73 @@ namespace eServices.IdentityService
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
             _events = events;
+            
+        }
+
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterCommand request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = new AppIdentityUser
+            {
+                UserName = request.UserName,
+                Email = request.Email, // it is critical here, it comes from client via query string
+                AvatarImgUrl = "Images/Avatars/default.png",
+                //FirstName = request.FirstName,
+                //LastName = request.LastName,
+                JoinDate = DateTime.Now,
+                LastUpdated = DateTime.Now,
+                EmailConfirmed = true, // it will set FALSE later for user register requesting email confirmation
+                UserRole = request.UserRole,
+                OrganizationId = 0,
+                IsDisabled = false,
+                // The following are not required here - will be populated in profile
+                //Telephone1 = request.Telephone1,
+                //Telephone2 = request.Telephone2,
+                //AddressStreet = request.AddressStreet,
+                //AddressCity = request.AddressCity,
+                //AddressStateProv = request.AddressProvState,
+                //AddressZipPostCode = request.AddressPostZipCode,
+                //AddressCountry = request.AddressCountry
+            };
+
+            //var userRegistered = new AppUserViewModel();
+
+            try
+            {
+                var result = await _userManager.CreateAsync(user, request.Password);
+
+                var role_result = await _userManager.AddToRoleAsync(user, request.UserRole);
+
+                if (!result.Succeeded /*&& !role_resuls.Succeeded*/) return  BadRequest(result.Errors);
+
+                // TO DO: Send notification email or request email verification
+
+                // Map the result to view model -- could be done by AutoMapper
+                //userRegistered.UserName = request.UserName;
+                //userRegistered.FirstName = request.FirstName;
+                //userRegistered.LastName = request.LastName;
+                //userRegistered.Email = request.Email;
+                //userRegistered.UserAvatarImgUrl = user.AvatarImgUrl;
+                //userRegistered.UserRole = request.UserRole;
+
+                //Log.Information("User {user} with {username} has registered successfully!", user.FirstName + user.LastName, user.UserName);
+                return Ok(new AppUserViewModel(user));
+
+            }
+            catch (Exception ex)
+            {
+                //Log.Error(ex, "Error occured :(" + ex.Message);
+                throw ex;
+            }
+
+
         }
 
         /// <summary>
@@ -231,6 +314,44 @@ namespace eServices.IdentityService
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        [Route("addrole")]
+        public async Task<IActionResult> AddRole([FromBody]AddUserRoleCommand request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //var result = await _mediator.Send(command);
+            var role = new AppIdentityRole();
+            role.Name = request.Name;
+            role.Description = request.Description;
+
+            //var roleAdded = new RoleViewModel();
+
+            try
+            {
+                var result = await _roleManager.CreateAsync(role);
+
+                //await _appDbContext.SaveChangesAsync();
+
+                //roleAdded.Name = request.Name;
+                //roleAdded.Description = request.Description;
+
+                //Log.Information("Role:" + request.Name + " has been added");
+
+            }
+            catch (Exception ex)
+            {
+                //Log.Error(ex, "Error occured :(" + ex.Message);
+                throw ex;
+            }
+
+            return Ok(new RoleViewModel(role));
         }
 
 

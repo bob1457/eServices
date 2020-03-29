@@ -1,0 +1,31 @@
+***********************************************************************
+Migration
+***********************************************************************
+
+******AspNet Core Identity DB******
+
+dotnet ef migrations add initial--context AppIdentityDbContext
+
+******IdentityServer PersistedGrantDb******
+
+dotnet ef migrations add initialis4p --context PersistedGrantDbContext
+
+******IdentityServer ConfigurationtDb******
+
+dotnet ef migrations add initialis4c --context ConfigurationDbContext
+
+***********************************************************************
+Database Update
+***********************************************************************
+
+******AspNet Core Identity DB******
+
+dotnet ef database update --context AppIdentityDbContext
+
+******IdentityServer PersistedGrantDb******
+
+dotnet ef database update --context PersistedGrantDbContext
+
+******IdentityServer ConfigurationtDb******
+
+dotnet ef database update initialis4c --context ConfigurationDbContext

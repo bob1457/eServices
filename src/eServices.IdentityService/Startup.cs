@@ -63,7 +63,7 @@ namespace eServices.IdentityService
                 .AddOperationalStore(options =>
                 {
                     options.ConfigureDbContext = b =>
-                    b.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                     b.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                      sql => sql.MigrationsAssembly(migrationsAssembly));
                     // this enables automatic token cleanup. this is optional.
                     options.EnableTokenCleanup = true;
