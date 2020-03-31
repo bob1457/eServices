@@ -59,7 +59,27 @@ namespace eServices.IdentityService
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     }
-                }
+                },
+
+                new Client
+                {
+                    ClientId = "js",
+                    ClientName = "JavaScript Client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequirePkce = true,
+                    RequireClientSecret = false,
+
+                    RedirectUris =           { "http://localhost:5004/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:5004/index.html" },
+                    AllowedCorsOrigins =     { "http://localhost:5004" },
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "ResurceApi"
+                    }
+}
             };
         }
 

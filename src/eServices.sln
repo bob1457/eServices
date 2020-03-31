@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eServices.TestApi", "eServi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eServices.WebApp", "eServices.WebApp\eServices.WebApp.csproj", "{F87C5AB4-3A23-42DC-B418-4B943831D848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eServices.JavaScriptApp", "eServices.JavaScriptApp\eServices.JavaScriptApp.csproj", "{A03C93C5-D2A3-4BD2-81A6-CC79452DD754}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eServices.JavaScriptApp", "eServices.JavaScriptApp\eServices.JavaScriptApp.csproj", "{A03C93C5-D2A3-4BD2-81A6-CC79452DD754}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +50,7 @@ Global
 		{D0D93438-575B-417F-9630-E4D0BA2AD093} = {2114379E-3EBD-4F56-9C20-E594D7916B4B}
 		{299D169F-CF4F-4E79-A498-5ACEEF18D440} = {2114379E-3EBD-4F56-9C20-E594D7916B4B}
 		{F87C5AB4-3A23-42DC-B418-4B943831D848} = {2114379E-3EBD-4F56-9C20-E594D7916B4B}
+		{A03C93C5-D2A3-4BD2-81A6-CC79452DD754} = {2114379E-3EBD-4F56-9C20-E594D7916B4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC34919D-271C-44BB-9717-83B711F22BB8}

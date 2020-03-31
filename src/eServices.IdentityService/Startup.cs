@@ -68,8 +68,18 @@ namespace eServices.IdentityService
                     // this enables automatic token cleanup. this is optional.
                     options.EnableTokenCleanup = true;
                     options.TokenCleanupInterval = 30; // interval in seconds
-                })
-                ;
+                });
+
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("http://localhost:5003")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
             services.AddMvc(options =>
             {
@@ -106,6 +116,8 @@ namespace eServices.IdentityService
             //{
             //    endpoints.MapControllers();
             //});
+
+            app.UseCors("default");
 
             app.UseMvc(routes =>
             {

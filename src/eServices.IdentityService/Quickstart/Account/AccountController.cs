@@ -84,8 +84,8 @@ namespace eServices.IdentityService
                 UserName = request.UserName,
                 Email = request.Email, // it is critical here, it comes from client via query string
                 AvatarImgUrl = "Images/Avatars/default.png",
-                //FirstName = request.FirstName,
-                //LastName = request.LastName,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 JoinDate = DateTime.Now,
                 LastUpdated = DateTime.Now,
                 EmailConfirmed = true, // it will set FALSE later for user register requesting email confirmation
