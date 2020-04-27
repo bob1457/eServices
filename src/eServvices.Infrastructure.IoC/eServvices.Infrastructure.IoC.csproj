@@ -5,14 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RabbitMQ.Client" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\eServices.Infrastrcutre.MessageBus.Core\eServices.Infrastrcutre.Messaging.Core.csproj" />
+    <ProjectReference Include="..\eServices.Infrastructure.MessageBus\eServices.Infrastructure.Messaging.Bus.csproj" />
   </ItemGroup>
 
 </Project>
