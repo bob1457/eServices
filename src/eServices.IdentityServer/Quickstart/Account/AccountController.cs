@@ -4,6 +4,7 @@
 
 using IdentityModel;
 using IdentityServer.Models;
+using IdentityServer.Models.ViewModels;
 using IdentityServer4;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
@@ -30,6 +31,8 @@ namespace IdentityServer
     /// </summary>
     [SecurityHeaders]
     [AllowAnonymous]
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class AccountController : Controller
     {
         //private readonly TestUserStore _users;
@@ -286,6 +289,42 @@ namespace IdentityServer
         }
 
 
+        [HttpPost]
+        //[Route("register]")]
+        [Route("api/[controller]/register")]
+        public async Task<IActionResult> Register([FromBody] RegistrationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //var user = new ApplicationUser { UserName = model.Email, FirstName = model.FirstName, LastName = model.LastName, Email = model.Email };
+
+            var user = new ApplicationUser
+            {
+                UserName = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                IsEnabled = true,
+                EmailConfirmed = true
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            if (!result.Succeeded) return BadRequest(result.Errors);
+
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("family_name", user.LastName));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("given_anem", user.FirstName));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("name", user.FirstName + " " + user.LastName));
+            //await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role", Roles.Consumer));
+
+            return Ok(new RegisterResultViewModel(user));
+        }
+
+        #region HELPERS
+
         /*****************************************/
         /* helper APIs for the AccountController */
         /*****************************************/
@@ -421,5 +460,7 @@ namespace IdentityServer
 
             return vm;
         }
+
+        #endregion
     }
 }

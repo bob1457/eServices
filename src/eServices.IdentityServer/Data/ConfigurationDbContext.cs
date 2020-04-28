@@ -26,6 +26,7 @@ namespace IdentityServer.Data
 
             base.OnModelCreating(modelBuilder);
 
+            // Awws IdentityServer client, claims, etc. -- can be disabled after seed
             ClientSeed(modelBuilder);
         }
 

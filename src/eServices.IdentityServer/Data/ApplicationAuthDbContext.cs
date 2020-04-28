@@ -23,8 +23,8 @@ namespace IdentityServer.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            //seed data
-            UsersSeed(builder);
+            //seed data -- disable it after seed completed the first time other than repeat seed
+            //UsersSeed(builder);
         }
 
         private void UsersSeed(ModelBuilder builder)

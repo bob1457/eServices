@@ -10,4 +10,4 @@ Update-Database -Context PersistedGrantDbContext
 
 Update-Database -Context ConfigurationDbContext
 
-Update-Database -Context IdentityDbContext
+Update-Database -Context ApplicationAuthDbContext
