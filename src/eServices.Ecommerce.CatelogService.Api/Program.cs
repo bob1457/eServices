@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace eServices.Ecommerce.CatelogService
+namespace eServices.Ecommerce.CatelogService.Api
 {
     public class Program
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace eServices.Ecommerce.CatelogService
+namespace eServices.Ecommerce.CatelogService.Api
 {
     public class WeatherForecast
     {

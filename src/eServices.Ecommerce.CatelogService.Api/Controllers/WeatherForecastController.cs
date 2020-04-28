@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace eServices.Ecommerce.CatelogService.Controllers
+namespace eServices.Ecommerce.CatelogService.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
