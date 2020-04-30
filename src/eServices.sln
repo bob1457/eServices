@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eServices.Ecommerce.Catelog
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eServices.Ecommerce.CatelogService.Data", "eServices.Ecommerce.CatelogService.Data\eServices.Ecommerce.CatelogService.Data.csproj", "{5FE7EB01-49EA-4867-A70F-D1096A267D00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AnalyticsService", "AnalyticsService", "{D7C3A0C0-385C-47B4-9865-D53715AC30D5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elearning", "Elearning", "{A5D3CF4C-9738-4E9D-97C4-E6920DDEB54F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +109,7 @@ Global
 		{87BDF379-229A-45B2-897C-964D73902F02} = {5102105E-61FC-4B21-A38C-BA1B11F72F41}
 		{06D58431-B2DB-45D0-BD6B-312D7D3A089E} = {5102105E-61FC-4B21-A38C-BA1B11F72F41}
 		{5FE7EB01-49EA-4867-A70F-D1096A267D00} = {5102105E-61FC-4B21-A38C-BA1B11F72F41}
+		{D7C3A0C0-385C-47B4-9865-D53715AC30D5} = {0A132FFC-CAF0-411F-95D6-40AB45D4225C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AC34919D-271C-44BB-9717-83B711F22BB8}
