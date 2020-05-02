@@ -36,7 +36,7 @@ namespace IdentityServer
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             // uncomment, if you want to add an MVC-based UI
-            services.AddControllersWithViews();
+            //services.AddControllersWithViews();
 
             //var builder = services.AddIdentityServer()
             //    .AddInMemoryIdentityResources(Config.Ids)
@@ -46,9 +46,9 @@ namespace IdentityServer
             services.AddDbContext<ApplicationAuthDbContext>(options => options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly)));
             services.AddDbContext<ConfigurationDbContext>(options => options.UseSqlServer(connectionString, sql => sql.MigrationsAssembly(migrationsAssembly)));
 
-            services.AddIdentity<ApplicationUser,IdentityRole>(options =>
-            {
-                options.SignIn.RequireConfirmedEmail = true;
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+             {
+                 options.SignIn.RequireConfirmedEmail = true; // it is possible to disable requiring confirm email
             })
                 .AddEntityFrameworkStores<ApplicationAuthDbContext>()
                 .AddDefaultTokenProviders();
@@ -84,6 +84,8 @@ namespace IdentityServer
             builder.AddDeveloperSigningCredential();
 
             services.AddScoped<IProfileService, ProfileService>();
+
+            services.AddMvc(); //.SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         public void Configure(IApplicationBuilder app)
@@ -101,9 +103,15 @@ namespace IdentityServer
 
             // uncomment, if you want to add MVC
             app.UseAuthorization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapDefaultControllerRoute();
+            //});
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
